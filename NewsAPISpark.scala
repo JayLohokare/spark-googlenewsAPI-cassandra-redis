@@ -16,9 +16,13 @@ z.load("datastax:spark-cassandra-connector:2.0.7-s_2.10")
 
 
 //Imports
-import com.datastax.spark.connector._
-import org.apache.spark.sql.cassandra._
-import scalaj.http._
+import com.steadystate.css.dom.CSSStyleRuleImpl._
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.SaveMode
+import org.apache.spark.SparkConf
+import org.apache.spark.SparkContext
+import org.apache.spark.sql.Row
+import org.apache.spark.sql.SQLContext
 import org.apache.spark.input.PortableDataStream
 import org.apache.tika.metadata._
 import org.apache.tika.parser._
@@ -29,9 +33,21 @@ import org.apache.tika.language.LanguageIdentifier
 import org.apache.tika.metadata.Metadata
 import org.apache.tika.parser.{AutoDetectParser, Parser, ParseContext}
 import org.apache.tika.sax.BodyContentHandler
+import org.apache.tika.parser.html.BoilerpipeContentHandler
 import org.apache.tika.parser.html.HtmlParser;
+import de.l3s.boilerpipe.document.TextDocument;
+import de.l3s.boilerpipe.extractors.CommonExtractors;
+import de.l3s.boilerpipe.sax.BoilerpipeSAXInput;
+import de.l3s.boilerpipe.sax.HTMLDocument;
+import de.l3s.boilerpipe.sax.HTMLFetcher;
+import org.cyberneko.html;
 import java.net.URL;
-
+import org.xml.sax;
+import com.gargoylesoftware.htmlunit
+import com.intenthq.gander._
+import com.gargoylesoftware.htmlunit._
+import org.w3c.dom.ElementTraversal
+import net.sourceforge.htmlunit._
 
 
 /*******************************News API call**********************************/
@@ -62,17 +78,49 @@ var outDF = spark.sql("select output.articles from GoogleNewTempView");
 def ParseURLContent(url: String) : String = {
 
     try { 
-        var stream : InputStream = new URL(url).openStream()
-        val handler : BodyContentHandler = new BodyContentHandler()
-        val metadata : Metadata = new Metadata()
-        val context : ParseContext = new ParseContext()
-        val htmlparser : HtmlParser = new HtmlParser()
-        htmlparser.parse(stream, handler, metadata, context)
-        var content = handler.toString().trim().replaceAll(" +", " ").replaceAll("\n", " ").replaceAll("\\s", " ").replaceAll("\\s+", " ").filter(_ >= ' ').replaceAll("""(?m)\s+$""","").replaceAll("""^\s+(?m)""","").replaceAll("\\P{Print}", "").replaceAll("\\\\x\\p{XDigit}{2}", "")
-        return content
+                val webClient : WebClient = new WebClient()
+                webClient.setThrowExceptionOnScriptError(false);
+                webClient.setCssEnabled(false);
+                webClient.setAppletEnabled(false);
+                webClient.setJavaScriptEnabled(false)
+
+                
+                val page : Page = webClient.getPage(url)
+                val response : WebResponse = page.getWebResponse()
+                val rawHTML : String = response.getContentAsString()
+                val string = Gander.extract(rawHTML)
+                
+                val content : String =string.toString().trim().replaceAll(" +", " ").replaceAll("\n", " ").replaceAll("\\s", " ").replaceAll("\\s+", " ").filter(_ >= ' ').replaceAll("""(?m)\s+$""","").replaceAll("""^\s+(?m)""","").replaceAll("\\P{Print}", "").replaceAll("\\\\x\\p{XDigit}{2}", "").substring(100)
+                
+                return content
+                
+                
+                // /***************Tika core*************************/
+                // var stream : InputStream = new URL(url).openStream()
+                // val handler : BodyContentHandler = new BodyContentHandler()
+                // val metadata : Metadata = new Metadata()
+                // val textExtractHandler : BoilerpipeContentHandler = new BoilerpipeContentHandler(handler)
+                // val context : ParseContext = new ParseContext()
+                // val htmlparser : HtmlParser = new HtmlParser()
+                // htmlparser.parse(stream, textExtractHandler, metadata, context)
+                
+                // var content = textExtractHandler.toString().trim().replaceAll(" +", " ").replaceAll("\n", " ").replaceAll("\\s", " ").replaceAll("\\s+", " ").filter(_ >= ' ').replaceAll("""(?m)\s+$""","").replaceAll("""^\s+(?m)""","").replaceAll("\\P{Print}", "").replaceAll("\\\\x\\p{XDigit}{2}", "").substring(100)
+                // var retString = Gander.extract(content).toString().trim().replaceAll(" +", " ").replaceAll("\n", " ").replaceAll("\\s", " ").replaceAll("\\s+", " ").filter(_ >= ' ').replaceAll("""(?m)\s+$""","").replaceAll("""^\s+(?m)""","").replaceAll("\\P{Print}", "").replaceAll("\\\\x\\p{XDigit}{2}", "").substring(100)
+// return retString
         
    } catch {
-        case e: Exception => return "ERROR FETCHING"
+        ctry{
+               
+                /***************BoilerPipe**************************/
+                val htmlDoc : HTMLDocument  = HTMLFetcher.fetch(new URL(url))  
+                val doc : TextDocument  = new BoilerpipeSAXInput(htmlDoc.toInputSource()).getTextDocument()
+                var content : String = CommonExtractors.ARTICLE_EXTRACTOR.getText(doc).toString().trim().replaceAll(" +", " ").replaceAll("\n", " ").replaceAll("\\s", " ").replaceAll("\\s+", " ").filter(_ >= ' ').replaceAll("""(?m)\s+$""","").replaceAll("""^\s+(?m)""","").replaceAll("\\P{Print}", "").replaceAll("\\\\x\\p{XDigit}{2}", "")
+                return content
+                
+           }
+           catch{
+                case e: Exception => return "ERROR FETCHING"
+}
    }
 }
 
