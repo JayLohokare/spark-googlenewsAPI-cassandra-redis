@@ -1,0 +1,4 @@
+[0m[[0m[31merror[0m] [0m[0m/home/jay/Desktop/UpTick/src/main/scala/newfetch.scala:105:13: not found: value SparkSession[0m
+[0m[[0m[31merror[0m] [0m[0mval spark = SparkSession.builder[0m
+[0m[[0m[31merror[0m] [0m[0m            ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

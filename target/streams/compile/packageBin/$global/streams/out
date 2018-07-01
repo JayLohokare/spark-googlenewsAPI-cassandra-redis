@@ -1,0 +1,29 @@
+[0m[[0m[0minfo[0m] [0m[0mPackaging /home/jay/Desktop/UpTick/target/scala-2.11/newsfetch_2.11-1.0.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/jay/Desktop/UpTick/target/scala-2.11/classes/com[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/uptick/newfetch/newsfetch$$anonfun$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/jay/Desktop/UpTick/target/scala-2.11/classes/com/uptick/newfetch/newsfetch$$anonfun$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/uptick/newfetch/newsfetch$$anonfun$ParseURLContent$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/jay/Desktop/UpTick/target/scala-2.11/classes/com/uptick/newfetch/newsfetch$$anonfun$ParseURLContent$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/uptick[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/jay/Desktop/UpTick/target/scala-2.11/classes/com/uptick[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/uptick/newfetch[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/jay/Desktop/UpTick/target/scala-2.11/classes/com/uptick/newfetch[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/uptick/newfetch/newsfetch$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/jay/Desktop/UpTick/target/scala-2.11/classes/com/uptick/newfetch/newsfetch$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/uptick/newfetch/newsfetch$$typecreator4$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/jay/Desktop/UpTick/target/scala-2.11/classes/com/uptick/newfetch/newsfetch$$typecreator4$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/uptick/newfetch/newsfetch$$typecreator2$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/jay/Desktop/UpTick/target/scala-2.11/classes/com/uptick/newfetch/newsfetch$$typecreator2$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/uptick/newfetch/newsfetch$$typecreator1$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/jay/Desktop/UpTick/target/scala-2.11/classes/com/uptick/newfetch/newsfetch$$typecreator1$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/uptick/newfetch/newsfetch.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/jay/Desktop/UpTick/target/scala-2.11/classes/com/uptick/newfetch/newsfetch.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/uptick/newfetch/newsfetch$$anonfun$RemoveDescriptionSpaces$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/jay/Desktop/UpTick/target/scala-2.11/classes/com/uptick/newfetch/newsfetch$$anonfun$RemoveDescriptionSpaces$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/uptick/newfetch/newsfetch$$anonfun$2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/jay/Desktop/UpTick/target/scala-2.11/classes/com/uptick/newfetch/newsfetch$$anonfun$2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	com/uptick/newfetch/newsfetch$$typecreator3$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/jay/Desktop/UpTick/target/scala-2.11/classes/com/uptick/newfetch/newsfetch$$typecreator3$1.class[0m
+[0m[[0m[0minfo[0m] [0m[0mDone packaging.[0m
