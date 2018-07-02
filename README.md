@@ -1,13 +1,28 @@
-# spark-scalable-news-sentiment
+Spark job to fetch real time / historic news and run sentiment analysis on it
 
-Spark job to fetch latest news and run sentiment analysis on it
+Uses NewsAPI.org for real time news feeds. 
 
-Uses a distributed REST API call framework to make parallel API calls to achieve scalability and highly available system.
+The project uses a distributed REST API call framework based on scala to allow handling multiple news topics. 
+See https://github.com/sourav-mazumder/Data-Science-Extensions for more details about the framework.
 
-Loads topics to fetch news for from Cassandra (Cassandra input column names should match newsapi.org API parameters).
+The project uses Cassandra for metadata source and news data storage.
 
-Uses Apache Tika for extracting data from HTML pages fetched by newsapi.org
+To generate the Spark jar file, run -
 
-Uses deeplearning4j to run sentiment analysis on content fetched.
+'''
+sbt package 
+'''
 
+The project requires external Spark-cassandra connector jar. This jar is passed as a command-line argument to spark-submit
 
+'''
+sudo bin/spark-submit --class com.uptick.newfetch.newsfetch newsfetch_2.11-1.0.jar --master local --conf spark2.cassandra.connection.host=ENTER_CASSANDRA_IP_HERE --jars jars/spark-cassandra-connector_2.11-2.3.0.jar
+'''
+
+Ensure that the dependencies versions are correct. The project currently uses Scala 2.11 with Spark 2.3
+
+Once the news link is fetched from newsapi.org, the project uses various methods to extract the main article content from html pages. 
+
+The project uses Cassandra keyspace called 'uptick'. The news topics are loaded from table 'cryptonews'. The table 'cryptonews' contains columns 'q', 'language', 'apikey' (Naming convention follows the API parameters for newsapi.org).
+
+The output of the application is stored in table 'mynewsapi'
