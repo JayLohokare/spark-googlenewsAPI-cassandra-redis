@@ -9,15 +9,15 @@ The project uses Cassandra for metadata source and news data storage.
 
 To generate the Spark jar file, run -
 
-'''
+```
 sbt package 
-'''
+```
 
 The project requires external Spark-cassandra connector jar. This jar is passed as a command-line argument to spark-submit
 
-'''
+```
 sudo bin/spark-submit --class com.uptick.newfetch.newsfetch newsfetch_2.11-1.0.jar --master local --conf spark2.cassandra.connection.host=ENTER_CASSANDRA_IP_HERE --jars jars/spark-cassandra-connector_2.11-2.3.0.jar
-'''
+```
 
 Ensure that the dependencies versions are correct. The project currently uses Scala 2.11 with Spark 2.3
 
