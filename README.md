@@ -16,7 +16,13 @@ sbt package
 The project requires external Spark-cassandra connector jar. This jar is passed as a command-line argument to spark-submit
 
 ```
-sudo bin/spark-submit --class com.uptick.newfetch.newsfetch newsfetch_2.11-1.0.jar --master local --conf spark2.cassandra.connection.host=ENTER_CASSANDRA_IP_HERE --jars jars/spark-cassandra-connector_2.11-2.3.0.jar
+sudo spark-submit \
+--jars location_to_cassandra_jar/spark-cassandra-connector_2.11-2.3.0.jar \
+--class com.uptick.newfetch.newsfetch \
+--master yarn \
+--deploy-mode cluster \
+--conf spark.cassandra.connection.host=Cassandra_IP_Address \
+location_of_jar/newsfetch_2.11-1.0.jar
 ```
 
 Ensure that the dependencies versions are correct. The project currently uses Scala 2.11 with Spark 2.3
