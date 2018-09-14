@@ -1,10 +1,4 @@
-Spark job to fetch real time / historic news and run sentiment analysis on it
-
-Uses 
-```
-NewsAPI.org
-```
-for real time news feeds. 
+Spark job to fetch real time data and save it to Databases (Cassandra)
 
 The project uses a distributed REST API call framework based on scala to allow handling multiple news topics. 
 See https://github.com/sourav-mazumder/Data-Science-Extensions for more details about the framework.
@@ -33,9 +27,6 @@ Ensure that the dependencies versions are correct. The project currently uses Sc
 
 Once the news link is fetched from newsapi.org, the project uses various methods to extract the main article content from html pages. 
 
-The project uses Cassandra keyspace called 'uptick'. The news topics are loaded from table 'cryptonews'. The table 'cryptonews' contains columns 'q', 'language', 'apikey' (Naming convention follows the API parameters for newsapi.org).
+The project uses Cassandra keyspace called 'keyspace'. The news topics are loaded from table 'apiParameters'. The table 'apiParameters' contains columns corresponding API paramteres.
 
-The output of the application is stored in table 'mynewsapi'
-
-
-//Under development - UDF for Tensorflow integration to get sentiment and relevance score from the extracted text
+The output of the application is stored in table 'output'
