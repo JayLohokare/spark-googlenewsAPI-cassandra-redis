@@ -133,7 +133,7 @@ val googleNewsURL = "https://newsapi.org/v2/everything"
 val df = spark
   .read
   .format("org.apache.spark.sql.cassandra")
-  .options(Map( "table" -> "cryptonews", "keyspace" -> "uptick" ))
+  .options(Map( "table" -> "apiParameters", "keyspace" -> "keyspace" ))
   .load()
 df.show()
 
@@ -169,7 +169,7 @@ drop("description_notClean")
 
 finalDataFrame.write
   .format("org.apache.spark.sql.cassandra")
-  .options(Map("table" -> "mynewsapi", "keyspace" -> "uptick"))
+  .options(Map("table" -> "output", "keyspace" -> "keyspace"))
   .mode(SaveMode.Append)
   .save()
 
